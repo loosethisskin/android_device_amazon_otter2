@@ -33,13 +33,30 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_FOLDER)/init.omap4430.rc:/root/init.omap4430.rc \
     $(DEVICE_FOLDER)/init.omap4430.usb.rc:/root/init.omap4430.usb.rc
 
-# Misc scripts
+# Recovery Trigger / TS module/config
+PRODUCT_COPY_FILES += \
+    $(DEVICE_FOLDER)/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
+
+# Prebuilt system/bin
 PRODUCT_COPY_FILES += \
     $(DEVICE_FOLDER)/prebuilt/bin/fix-mac.sh:/system/bin/fix-mac.sh \
-    $(DEVICE_FOLDER)/prebuilt/etc/vold.fstab:/system/etc/vold.fstab
+    $(DEVICE_FOLDER)/prebuilt/bin/idme:/system/bin/idme
+
+# Prebuilt system/etc
+PRODUCT_COPY_FILES += \
+    $(DEVICE_FOLDER)/prebuilt/etc/vold.fstab:/system/etc/vold.fstab \
+    $(DEVICE_FOLDER)/prebuilt/etc/firmware/ducati-m3.bin:/system/etc/firmware/ducati-m3.bin
+
+# Prebuilt system/lib
+PRODUCT_COPY_FILES += \
+    $(DEVICE_FOLDER)/prebuilt/lib/libidme.so:/system/lib/libidme.so
 
 PRODUCT_PACKAGES += \
     sdcard \
     setup_fs
 
-$(call inherit-product-if-exists, vendor/amazon/otter2/otter2-vendor.mk)
+# Device settings
+PRODUCT_PROPERTY_OVERRIDES += \
+    sys.usb.vid=1949 \
+    sys.usb.pid=000a
+

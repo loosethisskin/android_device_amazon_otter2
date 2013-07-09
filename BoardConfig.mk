@@ -22,13 +22,13 @@ DEVICE_FOLDER := device/amazon/otter2
 
 # Kernel
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_CMDLINE := mem=1G console=/dev/null
 TARGET_BOOTLOADER_BOARD_NAME := otter2
 TARGET_OTA_ASSERT_DEVICE := blaze_tablet,otter2
-
-# Kernel Build
 TARGET_KERNEL_SOURCE := kernel/amazon/otter-common
 TARGET_KERNEL_CONFIG := otter2_android_defconfig
+BOARD_KERNEL_CMDLINE := mem=1G console=/dev/null
+# Uncomment for recovery build w/ stock kernel
+#BOARD_KERNEL_CMDLINE := init=/init vram=5M omapfb.vram=0:5M console=ttyO2,115200n8 androidboot.console=ttyO2 omap_wdt.timer_margin=30
 
 # Filesystem
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
@@ -44,7 +44,7 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./$(DEVICE_FOLDER)/releasetools/bow
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./$(DEVICE_FOLDER)/releasetools/bowser_img_from_target_files
 
 # Recovery
-TARGET_RECOVERY_INITRC := $(DEVICE_FOLDER)/recovery/init.recovery.rc
+TARGET_RECOVERY_INITRC := $(DEVICE_FOLDER)/init.recovery.rc
 TARGET_RECOVERY_PRE_COMMAND := "idme bootmode 7; \#"
 
 # TWRP Config
